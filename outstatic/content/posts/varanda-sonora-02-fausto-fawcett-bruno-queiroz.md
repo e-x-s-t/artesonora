@@ -8,7 +8,7 @@ slug: 'varanda-sonora-02-fausto-fawcett-bruno-queiroz'
 description: ''
 coverImage: ''
 soundcloudLink: 'https://soundcloud.com/artesonora/varanda-sonora-02-fausto?in=artesonora/sets/varanda-sonora&si=6d437134e8aa46c4b1b4c628e899465f&utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing'
-fileLink: ''
+fileLink: 'https://arweave.net/MP81pcrgUc1xNH563ACJWZsD2L_w7VwV_knGkxQhGbM'
 tags: []
 collaborators: [{"label":"Fausto Fawcett","value":"faustoFawcett"},{"label":"Bruno Queiroz","value":"brunoQueiroz"}]
 type: [{"label":"Varanda Sonora","value":"varandaSonora"}]

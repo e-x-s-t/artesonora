@@ -1,6 +1,6 @@
 {
-  "commit": "5449c061080c999d8728854686b0460545d23787",
-  "generated": "2024-09-01T15:09:40.946Z",
+  "commit": "17687582aa2959a9c4ec0138354c6ca4eabc3ecc",
+  "generated": "2026-07-13T14:47:09.316Z",
   "metadata": [
     {
       "__outstatic": {
@@ -1741,44 +1741,6 @@
     },
     {
       "__outstatic": {
-        "commit": "521d2882c35cea305c6bf3fd7d20ec79796a9bd1",
-        "hash": "912703644",
-        "path": "outstatic/content/posts/varanda-sonora-02-fausto-fawcett-bruno-queiroz.md"
-      },
-      "author": {
-        "name": "Vitor Butkus",
-        "picture": "https://avatars.githubusercontent.com/u/106280545?v=4"
-      },
-      "collaborators": [
-        {
-          "label": "Fausto Fawcett",
-          "value": "faustoFawcett"
-        },
-        {
-          "label": "Bruno Queiroz",
-          "value": "brunoQueiroz"
-        }
-      ],
-      "collection": "posts",
-      "coverImage": "",
-      "description": "",
-      "fileLink": "",
-      "publishedAt": "2017-12-01T17:55:19.000Z",
-      "slug": "varanda-sonora-02-fausto-fawcett-bruno-queiroz",
-      "soundcloudLink": "https://soundcloud.com/artesonora/varanda-sonora-02-fausto?in=artesonora/sets/varanda-sonora&si=6d437134e8aa46c4b1b4c628e899465f&utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing",
-      "status": "published",
-      "tags": [
-      ],
-      "title": "Varanda Sonora #02 - Fausto Fawcett + Bruno Queiroz",
-      "type": [
-        {
-          "label": "Varanda Sonora",
-          "value": "varandaSonora"
-        }
-      ]
-    },
-    {
-      "__outstatic": {
         "commit": "ec8a5b8dc652d929bd94dd614bc638c4066e3764",
         "hash": "2705768439",
         "path": "outstatic/content/posts/varanda-sonora-01-arto-lindsay-magno-calliman.md"
@@ -1880,6 +1842,44 @@
         {
           "label": "Podcast",
           "value": "podcast"
+        }
+      ]
+    },
+    {
+      "__outstatic": {
+        "commit": "17687582aa2959a9c4ec0138354c6ca4eabc3ecc",
+        "hash": "2450560822",
+        "path": "outstatic/content/posts/varanda-sonora-02-fausto-fawcett-bruno-queiroz.md"
+      },
+      "author": {
+        "name": "Vitor Butkus",
+        "picture": "https://avatars.githubusercontent.com/u/106280545?v=4"
+      },
+      "collaborators": [
+        {
+          "label": "Fausto Fawcett",
+          "value": "faustoFawcett"
+        },
+        {
+          "label": "Bruno Queiroz",
+          "value": "brunoQueiroz"
+        }
+      ],
+      "collection": "posts",
+      "coverImage": "",
+      "description": "",
+      "fileLink": "https://arweave.net/MP81pcrgUc1xNH563ACJWZsD2L_w7VwV_knGkxQhGbM",
+      "publishedAt": "2017-12-01T17:55:19.000Z",
+      "slug": "varanda-sonora-02-fausto-fawcett-bruno-queiroz",
+      "soundcloudLink": "https://soundcloud.com/artesonora/varanda-sonora-02-fausto?in=artesonora/sets/varanda-sonora&si=6d437134e8aa46c4b1b4c628e899465f&utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing",
+      "status": "published",
+      "tags": [
+      ],
+      "title": "Varanda Sonora #02 - Fausto Fawcett + Bruno Queiroz",
+      "type": [
+        {
+          "label": "Varanda Sonora",
+          "value": "varandaSonora"
         }
       ]
     }
