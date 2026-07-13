@@ -8,7 +8,7 @@ slug: 'varanda-sonora-03-ricardo-basbaum'
 description: ''
 coverImage: ''
 soundcloudLink: 'https://soundcloud.com/artesonora/varanda-sonora-03-ricardo'
-fileLink: ''
+fileLink: 'https://arweave.net/jremmpamZ0-XvJspzGDjz1phx8w-IJLfguyxnNhKppA'
 tags: []
 collaborators: [{"label":"Ricardo Basbaum","value":"ricardoBasbaum"}]
 type: [{"value":"varandaSonora","label":"Varanda Sonora"}]
