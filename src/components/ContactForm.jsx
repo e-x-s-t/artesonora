@@ -6,7 +6,6 @@
 
 import ReCAPTCHA from 'react-google-recaptcha';
 import { useRef, useState } from 'react';
-import { verifyCaptcha } from '@/util/verifyCaptcha';
 import { useMediaQuery } from '@/util/useMediaQuery';
 
 export default function ContactForm() {
@@ -46,9 +45,8 @@ export default function ContactForm() {
     setSubmitError('');
     setIsSending(true);
     try {
-      await verifyCaptcha(token);
-      setIsVerified(true);
       await sendEmail(token);
+      setIsVerified(true);
       setShowCaptcha(false);
       alert('Mensagem enviada com sucesso! Em breve entraremos em contato.');
     } catch (err) {
