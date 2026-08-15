@@ -121,7 +121,10 @@ export default function Navbar() {
             }, 500);
           }}
           // onMouseMove={() => controlsContainer.start('on')}
-          onMouseLeave={() => controlsContainer.start('off')}
+          onMouseLeave={() => {
+            controlsContainer.start('off');
+            controls.start('off');
+          }}
           onClick={() => {
             setIsClicked(true);
             controlsContainer.start('off');

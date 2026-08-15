@@ -150,7 +150,7 @@ export default function HomeVaranda({ firstThree }) {
         {/* description */}
         <Link
           href='/varanda-sonora'
-          className='absolute left-5 md:left-8 bottom-5 md:bottom-8 w-[80%] md:w-1/3 text-left text-base text-white/90 flex flex-col gap-2 leading-snug pointer-events-none md:pointer-events-auto translate-y-4'
+          className='absolute left-5 md:left-8 bottom-5 md:bottom-8 w-[80%] md:w-1/3 text-left text-base text-white/90 flex flex-col gap-2 leading-snug pointer-events-none md:pointer-events-auto translate-y-1 md:translate-y-4'
           style={{
             opacity: isLoading ? 0 : 1,
             transitionProperty: 'opacity',
