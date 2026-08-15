@@ -14,8 +14,18 @@ export default function AllCardsAtivacoes({ items }) {
   const isDesktop = useMediaQuery('md');
   const pathname = usePathname();
   const [filteredItems, setFilteredItems] = useState([]);
-  const { ativacoesYear } = useContext(MainContext);
+  const { ativacoesYear, changeAtivacoesYear } = useContext(MainContext);
   // console.log('items', items);
+
+  useEffect(() => {
+    if (items.length) {
+      const years = items.map((item) => Number(item.publishedAt.slice(0, 4)));
+      const mostRecentYear = Math.max(...years);
+      if (!years.includes(ativacoesYear)) {
+        changeAtivacoesYear(mostRecentYear);
+      }
+    }
+  }, [items]);
 
   useEffect(() => {
     if (items.length && ativacoesYear) {

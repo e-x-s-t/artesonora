@@ -90,7 +90,7 @@ const DotGrid = ({ gridWidth, gridHeight }) => {
             className='dot-point h-2 w-2 rounded-full bg-gradient-to-b from-neutral-500 to-neutral-400 opacity-50 '
             data-index={index}
           />
-        </div>
+        </div>,
       );
       index++;
     }
