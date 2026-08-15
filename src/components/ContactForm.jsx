@@ -18,10 +18,11 @@ export default function ContactForm() {
 
   const recaptchaRef = useRef();
   const [isVerified, setIsVerified] = useState(false);
+  const [isSending, setIsSending] = useState(false);
+  const [submitError, setSubmitError] = useState('');
   const isDesktop = useMediaQuery('md');
 
-  const sendEmail = async () => {
-    // console.log(name, email, subject, message);
+  const sendEmail = async (captchaToken) => {
     const res = await fetch('/api/send', {
       method: 'POST',
       headers: {
@@ -32,22 +33,33 @@ export default function ContactForm() {
         email,
         subject,
         message,
+        captchaToken,
       }),
     });
     const data = await res.json();
-    // console.log(data);
+    if (!res.ok || data.error) {
+      throw new Error(data?.error?.message || 'Falha ao enviar mensagem.');
+    }
   };
 
   async function handleCaptchaSubmission(token) {
-    // Server function to verify captcha
-    await verifyCaptcha(token)
-      .then(() => {
-        setIsVerified(true);
-        setShowCaptcha(false);
-        sendEmail();
-        alert('Mensagem enviada com sucesso! Em breve entraremos em contato.');
-      })
-      .catch(() => setIsVerified(false));
+    setSubmitError('');
+    setIsSending(true);
+    try {
+      await verifyCaptcha(token);
+      setIsVerified(true);
+      await sendEmail(token);
+      setShowCaptcha(false);
+      alert('Mensagem enviada com sucesso! Em breve entraremos em contato.');
+    } catch (err) {
+      setIsVerified(false);
+      recaptchaRef.current?.reset();
+      setSubmitError(
+        'Não foi possível enviar a mensagem. Tente novamente em instantes.'
+      );
+    } finally {
+      setIsSending(false);
+    }
   }
 
   return (
@@ -120,18 +132,23 @@ export default function ContactForm() {
             Enviar
           </button>
         ) : (
-          <div className='flex w-full gap-4 justify-between text-sm'>
-            <div className=''>Complete o CAPTCHA para enviar:</div>
-            <ReCAPTCHA
-              sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
-              ref={recaptchaRef}
-              onChange={handleCaptchaSubmission}
-            />
+          <div className='flex flex-col w-full gap-2 text-sm'>
+            <div className='flex w-full gap-4 justify-between items-center'>
+              <div>
+                {isSending
+                  ? 'Enviando mensagem...'
+                  : 'Complete o CAPTCHA para enviar:'}
+              </div>
+              <ReCAPTCHA
+                sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
+                ref={recaptchaRef}
+                onChange={handleCaptchaSubmission}
+              />
+            </div>
+            {submitError && (
+              <div className='text-red-400'>{submitError}</div>
+            )}
           </div>
-          //   <ReCAPTCHA
-          //     sitekey='6LdyfDUnAAAAAPSlDjtujCddrG1SakTVbzcVpeUD'
-          //     onChange={sendEmail}
-          //   />
         )}
       </form>
     </div>
