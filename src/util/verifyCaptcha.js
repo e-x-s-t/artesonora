@@ -9,6 +9,7 @@ export async function verifyCaptcha(token) {
   if (res.data.success) {
     return 'success!';
   } else {
+    console.error('reCAPTCHA verification failed:', res.data['error-codes']);
     throw new Error('Failed Captcha');
   }
 }

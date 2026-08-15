@@ -13,6 +13,30 @@ import { usePathname } from 'next/navigation';
 import { MainContext } from '@/context/mainContext';
 // console.log = originalLog;
 
+// Arweave gateway URLs no longer return Content-Length/Accept-Ranges on the
+// plain path, which makes <audio> report duration=Infinity (shows as "LIVE",
+// no scrubber). The /raw/ path preserves those headers and supports Range
+// requests, restoring seeking.
+function toSeekableArweaveUrl(src: string): string {
+  if (!src) return src;
+
+  const subdomainMatch = src.match(
+    /^https:\/\/[a-z0-9]+\.arweave\.net\/([a-zA-Z0-9_-]+)/
+  );
+  if (subdomainMatch) {
+    return `https://arweave.net/raw/${subdomainMatch[1]}`;
+  }
+
+  const plainMatch = src.match(
+    /^https:\/\/arweave\.net\/(?!raw\/)([a-zA-Z0-9_-]+)/
+  );
+  if (plainMatch) {
+    return `https://arweave.net/raw/${plainMatch[1]}`;
+  }
+
+  return src;
+}
+
 export default function PlayerBar() {
   const playerRef = useRef(null);
   const pathname = usePathname();
@@ -33,7 +57,7 @@ export default function PlayerBar() {
           cover: playImg,
           // src: '/audio/audio.mp3',
           // src: 'https://s3i4vqew3cvrd6rabrqoewqqruwkhspfzca532jrm7wx6x5e7sja.arweave.net/ltHKwJbYqxH6IAxg4loQjSyjyeXIgd3pMWftf1-k_JI',
-          src: playSrc,
+          src: toSeekableArweaveUrl(playSrc),
         },
         download: true,
         autoplay: false,
