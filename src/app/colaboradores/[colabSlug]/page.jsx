@@ -1,6 +1,7 @@
 import HeaderSubpage from '@/components/HeaderSubpage';
 import { getDocumentBySlug, load, getDocumentSlugs } from 'outstatic/server';
 import markdownToHtml from '../../../lib/markdownToHtml';
+import { excerptFromMarkdown } from '@/lib/utils';
 import PlayButton from '@/components/PlayButton';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -59,7 +60,40 @@ async function getData(params) {
   };
 }
 
-// export async function generateStaticParams() {}
+export async function generateMetadata({ params }) {
+  const collab = await getData(params);
+
+  if (!collab) {
+    return {};
+  }
+
+  const description = excerptFromMarkdown(collab.content);
+
+  return {
+    title: collab.title,
+    description,
+    openGraph: {
+      title: collab.title,
+      description,
+      type: 'profile',
+      url: `/colaboradores/${collab.slug}`,
+      images: [
+        {
+          url: collab.coverImage || '/images/ogImage.png',
+          width: 1200,
+          height: 630,
+          alt: collab.title,
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: collab.title,
+      description,
+      images: collab.coverImage || '/images/ogImage.png',
+    },
+  };
+}
 
 export default async function ColabSlug({ params }) {
   const {

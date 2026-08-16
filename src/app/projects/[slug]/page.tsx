@@ -7,7 +7,6 @@ import Image from 'next/image'
 import ContentGrid from '@/components/ContentGrid'
 import { OstDocument } from 'outstatic'
 import { Metadata } from 'next'
-import { absoluteUrl } from '@/lib/utils'
 import { notFound } from 'next/navigation'
 
 type Project = {
@@ -33,10 +32,10 @@ export async function generateMetadata(params: Params): Promise<Metadata> {
       title: project.title,
       description: project.description,
       type: 'article',
-      url: absoluteUrl(`/projects/${project.slug}`),
+      url: `/projects/${project.slug}`,
       images: [
         {
-          url: absoluteUrl(project?.coverImage || '/images/og-image.png'),
+          url: project?.coverImage || '/images/ogImage.png',
           width: 1200,
           height: 630,
           alt: project.title
@@ -47,7 +46,7 @@ export async function generateMetadata(params: Params): Promise<Metadata> {
       card: 'summary_large_image',
       title: project.title,
       description: project.description,
-      images: absoluteUrl(project?.coverImage || '/images/og-image.png')
+      images: project?.coverImage || '/images/ogImage.png'
     }
   }
 }

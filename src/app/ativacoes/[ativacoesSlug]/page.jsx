@@ -9,6 +9,7 @@ import OptionsAtivacoes from '@/components/subpages/OptionsAtivacoes';
 import bgAtivacoes from '../../../../public/images/bgAtivacoes.jpg';
 import Link from 'next/link';
 import { LiaFastBackwardSolid } from 'react-icons/lia';
+import { excerptFromMarkdown } from '@/lib/utils';
 
 async function getData(params) {
   const post = getDocumentBySlug('news', params.ativacoesSlug, [
@@ -39,6 +40,41 @@ async function getData(params) {
     ...post,
     content,
     //   collaboratorsData,
+  };
+}
+
+export async function generateMetadata({ params }) {
+  const post = await getData(params);
+
+  if (!post) {
+    return {};
+  }
+
+  const description = excerptFromMarkdown(post.content);
+
+  return {
+    title: post.title,
+    description,
+    openGraph: {
+      title: post.title,
+      description,
+      type: 'article',
+      url: `/ativacoes/${post.slug}`,
+      images: [
+        {
+          url: post.coverImage || '/images/ogImage.png',
+          width: 1200,
+          height: 630,
+          alt: post.title,
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: post.title,
+      description,
+      images: post.coverImage || '/images/ogImage.png',
+    },
   };
 }
 

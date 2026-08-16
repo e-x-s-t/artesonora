@@ -30,7 +30,7 @@ const chakra = Chakra_Petch({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://artesonora.net/'),
+  metadataBase: new URL('https://www.artesonora.net/'),
   title: {
     default: 'Arte Sonora',
     template: '%s | Arte Sonora',

@@ -58,7 +58,7 @@ const Layout = ({ children }: Props) => {
               // animate='animate'
               // exit='exit'
               id='main'
-              className=' z-[1] w-screen bg-zinc-900'
+              className=' z-[1] w-screen md:w-full bg-zinc-900'
             >
               {/* <Suspense fallback={<Loading />}> */}
               {children}
