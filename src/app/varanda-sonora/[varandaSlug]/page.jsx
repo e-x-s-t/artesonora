@@ -7,6 +7,7 @@ import PlaySlug from '@/components/PlaySlug';
 import { HiOutlineArrowNarrowDown } from 'react-icons/hi';
 import Title from '@/components/subpages/Title';
 import bgVarandaSlug from '../../../../public/images/bgVarandaSlug.jpg';
+import { excerptFromMarkdown } from '@/lib/utils';
 
 async function getData(params) {
   const post = getDocumentBySlug('posts', params.varandaSlug, [
@@ -47,6 +48,41 @@ async function getData(params) {
     ...post,
     content,
     collaboratorsData,
+  };
+}
+
+export async function generateMetadata({ params }) {
+  const post = await getData(params);
+
+  if (!post) {
+    return {};
+  }
+
+  const description = excerptFromMarkdown(post.content);
+
+  return {
+    title: post.title,
+    description,
+    openGraph: {
+      title: post.title,
+      description,
+      type: 'article',
+      url: `/varanda-sonora/${post.slug}`,
+      images: [
+        {
+          url: post.coverImage || '/images/ogImage.png',
+          width: 1200,
+          height: 630,
+          alt: post.title,
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: post.title,
+      description,
+      images: post.coverImage || '/images/ogImage.png',
+    },
   };
 }
 

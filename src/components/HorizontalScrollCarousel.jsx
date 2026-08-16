@@ -32,6 +32,25 @@ const HorizontalScrollCarousel = ({ newestPosts }) => {
             return <CarouselCard post={post} key={i} />;
           })}
         </motion.div>
+        <div className='pointer-events-none absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 text-white/40'>
+          <span className='text-xs uppercase tracking-widest font-semibold'>
+            Continue rolando
+          </span>
+          <motion.svg
+            animate={{ y: [0, 6, 0] }}
+            transition={{ duration: 1.4, repeat: Infinity }}
+            width='20'
+            height='20'
+            viewBox='0 0 24 24'
+            fill='none'
+            stroke='currentColor'
+            strokeWidth='2'
+            strokeLinecap='round'
+            strokeLinejoin='round'
+          >
+            <path d='M12 5v14M19 12l-7 7-7-7' />
+          </motion.svg>
+        </div>
       </div>
     </section>
   );

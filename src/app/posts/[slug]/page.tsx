@@ -6,7 +6,6 @@ import Layout from '@/components/Layout'
 import markdownToHtml from '@/lib/markdownToHtml'
 import { getDocumentSlugs, load } from 'outstatic/server'
 import DateFormatter from '@/components/DateFormatter'
-import { absoluteUrl } from '@/lib/utils'
 import { notFound } from 'next/navigation'
 
 type Post = {
@@ -33,10 +32,10 @@ export async function generateMetadata(params: Params): Promise<Metadata> {
       title: post.title,
       description: post.description,
       type: 'article',
-      url: absoluteUrl(`/posts/${post.slug}`),
+      url: `/posts/${post.slug}`,
       images: [
         {
-          url: absoluteUrl(post?.coverImage || '/images/og-image.png'),
+          url: post?.coverImage || '/images/ogImage.png',
           width: 1200,
           height: 630,
           alt: post.title
@@ -47,7 +46,7 @@ export async function generateMetadata(params: Params): Promise<Metadata> {
       card: 'summary_large_image',
       title: post.title,
       description: post.description,
-      images: absoluteUrl(post?.coverImage || '/images/og-image.png')
+      images: post?.coverImage || '/images/ogImage.png'
     }
   }
 }
