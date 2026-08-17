@@ -1,3 +1,10 @@
+export const SITE_URL = 'https://www.artesonora.net';
+
+export function siteUrl(path?: string | null) {
+  if (!path) return undefined;
+  return path.startsWith('http') ? path : `${SITE_URL}${path}`;
+}
+
 export function absoluteUrl(path: string) {
   return `${
     process.env?.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'

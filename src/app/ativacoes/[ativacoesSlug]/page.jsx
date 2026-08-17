@@ -9,7 +9,7 @@ import OptionsAtivacoes from '@/components/subpages/OptionsAtivacoes';
 import bgAtivacoes from '../../../../public/images/bgAtivacoes.jpg';
 import Link from 'next/link';
 import { LiaFastBackwardSolid } from 'react-icons/lia';
-import { excerptFromMarkdown } from '@/lib/utils';
+import { excerptFromMarkdown, SITE_URL, siteUrl } from '@/lib/utils';
 
 async function getData(params) {
   const post = getDocumentBySlug('news', params.ativacoesSlug, [
@@ -89,8 +89,26 @@ export default async function Page({ params }) {
     // collaboratorsData,
   } = await getData(params);
 
+  const creativeWorkJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'CreativeWork',
+    name: title,
+    image: siteUrl(coverImage),
+    datePublished: publishedAt,
+    url: `${SITE_URL}/ativacoes/${slug}`,
+    creator: {
+      '@type': 'Organization',
+      name: 'Arte Sonora',
+      url: `${SITE_URL}/`,
+    },
+  };
+
   return (
     <section className='relative text-white/50 max-w-[100vw] h-full md:max-w-none md:w-[calc(100vw-52px)]  md:h-full md:min-h-[calc(100vh-92px)] '>
+      <script
+        type='application/ld+json'
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(creativeWorkJsonLd) }}
+      />
       {/* fixed: */}
       <div className='fixed top-0 md:left-[52px] w-full  md:w-[calc(100vw-52px)] h-[calc(100vh-109px)] md:h-[calc(100vh-92px)] overflow-x-hidden'>
         <div className='relative w-full h-full overflow-hidden'>

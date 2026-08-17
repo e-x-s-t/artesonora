@@ -1,7 +1,7 @@
 import HeaderSubpage from '@/components/HeaderSubpage';
 import { getDocumentBySlug, load, getDocumentSlugs } from 'outstatic/server';
 import markdownToHtml from '../../../lib/markdownToHtml';
-import { excerptFromMarkdown } from '@/lib/utils';
+import { excerptFromMarkdown, SITE_URL, siteUrl } from '@/lib/utils';
 import PlayButton from '@/components/PlayButton';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -114,8 +114,21 @@ export default async function ColabSlug({ params }) {
   //   'podcast'
   // )}`;
 
+  const personJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    name: title,
+    image: siteUrl(coverImage),
+    url: `${SITE_URL}/colaboradores/${slug}`,
+    sameAs: [instagram, twitter, facebook].filter(Boolean),
+  };
+
   return (
     <section className='relative text-white/50 max-w-[100vw] h-full md:max-w-none md:w-[calc(100vw-52px)]  md:h-full md:min-h-[calc(100vh-92px)] '>
+      <script
+        type='application/ld+json'
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
+      />
       {/* fixed: */}
       <div className='fixed top-0 md:left-[52px] w-full  md:w-[calc(100vw-52px)] h-[calc(100vh-109px)] md:h-[calc(100vh-92px)] overflow-x-hidden'>
         <div className='relative w-full h-full overflow-hidden'>
