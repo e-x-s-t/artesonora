@@ -72,6 +72,9 @@ export async function generateMetadata({ params }) {
   return {
     title: collab.title,
     description,
+    alternates: {
+      canonical: `/colaboradores/${collab.slug}`,
+    },
     openGraph: {
       title: collab.title,
       description,

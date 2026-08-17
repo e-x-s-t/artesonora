@@ -63,6 +63,9 @@ export async function generateMetadata({ params }) {
   return {
     title: post.title,
     description,
+    alternates: {
+      canonical: `/varanda-sonora/${post.slug}`,
+    },
     openGraph: {
       title: post.title,
       description,

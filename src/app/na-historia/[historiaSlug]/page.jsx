@@ -69,6 +69,9 @@ export async function generateMetadata({ params }) {
   return {
     title: post.title,
     description,
+    alternates: {
+      canonical: `/na-historia/${post.slug}`,
+    },
     openGraph: {
       title: post.title,
       description,
