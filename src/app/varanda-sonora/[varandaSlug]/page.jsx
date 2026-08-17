@@ -7,7 +7,7 @@ import PlaySlug from '@/components/PlaySlug';
 import { HiOutlineArrowNarrowDown } from 'react-icons/hi';
 import Title from '@/components/subpages/Title';
 import bgVarandaSlug from '../../../../public/images/bgVarandaSlug.jpg';
-import { excerptFromMarkdown } from '@/lib/utils';
+import { excerptFromMarkdown, SITE_URL, siteUrl } from '@/lib/utils';
 
 async function getData(params) {
   const post = getDocumentBySlug('posts', params.varandaSlug, [
@@ -102,8 +102,26 @@ export default async function VarandaSlug({ params }) {
     collaboratorsData,
   } = await getData(params);
 
+  const creativeWorkJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'CreativeWork',
+    name: title,
+    image: siteUrl(coverImage),
+    datePublished: publishedAt,
+    url: `${SITE_URL}/varanda-sonora/${slug}`,
+    creator: (collaboratorsData || []).map((c) => ({
+      '@type': 'Person',
+      name: c.title,
+      url: `${SITE_URL}/colaboradores/${c.slug}`,
+    })),
+  };
+
   return (
     <section className='relative text-white/50 max-w-[100vw] h-full md:max-w-none md:w-[calc(100vw-52px)]  md:h-full md:min-h-[calc(100vh-92px)] '>
+      <script
+        type='application/ld+json'
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(creativeWorkJsonLd) }}
+      />
       {/* fixed: */}
       <div className='fixed top-0 md:left-[52px] w-full  md:w-[calc(100vw-52px)] h-[calc(100vh-109px)] md:h-[calc(100vh-92px)] overflow-x-hidden'>
         <div className='relative w-full h-full overflow-hidden'>

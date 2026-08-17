@@ -7,7 +7,7 @@ import { useEffect } from 'react';
 import Lenis from 'lenis';
 
 import { Metadata } from 'next';
-import { absoluteUrl } from '@/lib/utils';
+import { SITE_URL } from '@/lib/utils';
 
 import { Lato, Chakra_Petch } from 'next/font/google';
 
@@ -29,23 +29,24 @@ const chakra = Chakra_Petch({
   adjustFontFallback: false,
 });
 
+const SITE_DESCRIPTION =
+  'Arte Sonora é uma prática artística coletiva desenvolvida pelo duo de artistas Franz Manata e Saulo Laudares, através de cursos, residências, exposições, happenings, programas de rádio e publicações. Aqui você encontra materiais que documentam os 15 anos desta prática.';
+
 export const metadata: Metadata = {
-  metadataBase: new URL('https://www.artesonora.net/'),
+  metadataBase: new URL(`${SITE_URL}/`),
   title: {
     default: 'Arte Sonora',
     template: '%s | Arte Sonora',
   },
-  description:
-    'Arte Sonora é uma prática artística coletiva desenvolvida pelo duo de artistas Franz Manata e Saulo Laudares, através de cursos, residências, exposições, happenings, programas de rádio e publicações. Aqui você encontra materiais que documentam os 15 anos desta prática.',
+  description: SITE_DESCRIPTION,
   openGraph: {
     title: 'Arte Sonora',
-    description:
-      'Arte Sonora é uma prática artística coletiva desenvolvida pelo duo de artistas Franz Manata e Saulo Laudares, através de cursos, residências, exposições, happenings, programas de rádio e publicações. Aqui você encontra materiais que documentam os 15 anos desta prática.',
-    url: 'https://artesonora.net/',
+    description: SITE_DESCRIPTION,
+    url: `${SITE_URL}/`,
     siteName: 'Arte Sonora',
     images: [
       {
-        url: 'https://artesonora.net/images/ogImage.png',
+        url: `${SITE_URL}/images/ogImage.png`,
         width: 1157,
         height: 630,
       },
@@ -58,7 +59,7 @@ export const metadata: Metadata = {
     apple: [{ url: '/images/play.png' }],
   },
   alternates: {
-    canonical: 'https://www.artesonora.net/',
+    canonical: `${SITE_URL}/`,
   },
   keywords: [
     'arte sonora',
@@ -88,6 +89,16 @@ export default function RootLayout({
   //   return <>{children}</>;
   // }
 
+  const organizationJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: 'Arte Sonora',
+    url: `${SITE_URL}/`,
+    logo: `${SITE_URL}/images/ogImage.png`,
+    image: `${SITE_URL}/images/ogImage.png`,
+    description: SITE_DESCRIPTION,
+  };
+
   return (
     <html
       lang='pt'
@@ -98,6 +109,10 @@ export default function RootLayout({
         rel='stylesheet'
       /> */}
       <body className='bg-zinc-900'>
+        <script
+          type='application/ld+json'
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
+        />
         <Layout>{children}</Layout>
       </body>
     </html>

@@ -1,27 +1,10 @@
 import { MetadataRoute } from 'next';
 import { getDocuments, getDocumentSlugs } from 'outstatic/server';
-
-const BASE_URL = 'https://www.artesonora.net';
-
-type PostWithType = {
-  type: { label: string }[];
-  slug: string;
-  status: string;
-};
+import { SITE_URL as BASE_URL } from '@/lib/utils';
+import { postsByType } from '@/lib/outstatic';
 
 function postSlugsByType(typeLabel: string) {
-  const allPosts = getDocuments('posts', [
-    'type',
-    'slug',
-    'status',
-  ]) as unknown as PostWithType[];
-  return allPosts
-    .filter(
-      (post) =>
-        post.type?.map((type) => type.label).includes(typeLabel) &&
-        post.status === 'published'
-    )
-    .map((post) => post.slug);
+  return postsByType(typeLabel).map((post) => post.slug);
 }
 
 export default function sitemap(): MetadataRoute.Sitemap {
