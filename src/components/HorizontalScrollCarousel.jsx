@@ -32,7 +32,7 @@ const HorizontalScrollCarousel = ({ newestPosts }) => {
             return <CarouselCard post={post} key={i} />;
           })}
         </motion.div>
-        <div className='pointer-events-none absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 text-white/40'>
+        <div className='pointer-events-none absolute bottom-32 md:bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 text-white/40'>
           <span className='text-xs uppercase tracking-widest font-semibold'>
             Continue rolando
           </span>
